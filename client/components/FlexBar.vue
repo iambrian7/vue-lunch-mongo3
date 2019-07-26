@@ -15,6 +15,11 @@
     </div>
     <input type="checkbox" id="nav-check">
     <div class="nav-links">
+      <router-link to="/example">Example</router-link>
+      <!-- <router-link to="/groups">Groups</!--> -->
+      <!-- <router-link to="/creategroup">Create Group</router-link>
+      <router-link to="/editall">Edit All </router-link> -->
+      <router-link to="/about">About</router-link>
       <!-- <router-link to="/expire"  @click="trigger" >Expire</router-link>
       <router-link to="/expiretest"  @click="trigger" >ExpireTest</router-link>
       <router-link to="/accounts2"  @click="trigger" >Accounts</router-link>

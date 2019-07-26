@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <!-- <img src="../assets/Red_Cow_CreativeBurger.jpg" alt=""> -->
+    <!-- <img src="../images/Red_Cow_CreativeBurger.jpg" alt=""> -->
     <div class="about-container">
       <div class="title">
         <p>Just friends out for lunch</p>
@@ -16,7 +16,7 @@
 <style>
 .about{
   height: 100vh;
-  background-image: url("../assets/Red_Cow_CreativeBurger.jpg");
+  background-image: url("../images/Red_Cow_CreativeBurger.jpg");
 }
 .about-container{
   margin: 0 auto;

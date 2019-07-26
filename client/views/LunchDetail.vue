@@ -79,13 +79,14 @@
   // "website": {type: String, required: false},
   // "lat": {type: String, required: false},
   // "lng": {type: String, required: false}, 
-import GoogleMap from '@/components/googlemaps'
+// import GoogleMap from '@/components/googlemaps'
  // import Nav from '@/components/navigation'
-  export default {
+ module.exports = {
+  // export default {
     name: 'lunchdetail',
     props: ["item","back"],
     components: {
-      "google-map": GoogleMap
+      "google-map": httpVueLoader('../components/googlemaps.vue'),
     },
     data () {
     return {

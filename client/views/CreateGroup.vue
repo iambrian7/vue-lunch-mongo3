@@ -39,7 +39,8 @@
   <script>
   // import Nav from '@/components/navigation'
   import { mapActions } from 'vuex';
-  export default {
+  module.exports = {
+  // export default {
     name: 'CreateGroup',
     data () {
     return {

@@ -1,29 +1,24 @@
 <template>
     <div id="example">
         <h1>{{msg}}</h1>
-        <h3>Just some friends who have kept in contact from 2006 to 2019</h3>
-        <div class="search-lunch">
-            <form id="search">
-                Search <input name="query" v-model="searchQuery">
-                <span>Showing {{filteredLunches.length}} lunches</span>
-              </form>
-        </div>
         <button class="map-button" @click="mapOn = !mapOn">Map</button>
         <div class="container">
           <div class="lunch-list" v-if="mapOn">
-            <div class="lunch" v-if="isLoggedIn"><router-link :to="{ name: 'lunchdetail', params: {item: '', back: 'true' } }">add lunch..</router-link></div>
-            <div class="lunch" v-for="(lunch, i, index) in filteredLunches" :key="i">
+            <div class="lunch"><router-link :to="{ name: 'lunchdetail', params: {item: '', back: 'true' } }">add lunch..</router-link></div>
+            <div class="lunch" v-for="(lunch, i, index) in lunches" :key="i">
+              <!-- <h3 v-if="lunch.section">{{lunch.section}} </h3> -->
               {{ i+1}}.  Date: {{ lunch.date}} Name: {{ lunch.restaurant}} Owner: {{ lunch.owner }} 
               <p>{{lunch.addr}}</p>
               <p><router-link :to="{ name: 'lunchdetail', params: {item: lunch } }">more..</router-link></p>
-
+             <!-- <p> <router-link :to="{path:'detail',params:{item:lunch}}">Detail</router-link></p> -->
+             <!-- <p> <router-link :to="{name:'lunchdetail',props:{id:lunch._id,item:lunch}}">Detail</router-link></p> -->
               
             </div>
           </div>
           <!-- now map -->
-          <div class="my-map">
+          <!-- <div class="my-map">
               <google-map :locations="lunches" @clicked="onClickMap"></google-map>
-          </div>
+          </div> -->
         </div>
     </div>
   </template>
@@ -33,16 +28,15 @@
  // import Nav from '@/components/navigation'
  module.exports = {
   // export default {
-    name: 'MonthlyLunch.com example',
+    name: 'Example',
     components: {
-      "google-map": httpVueLoader('../components/googlemaps.vue'),
+      // "google-map": httpVueLoader('../components/googlemaps.vue'),
       // "google-map": GoogleMap
     },
     data () {
     return {
       msg: 'Example Page',
-      mapOn: true,
-      searchQuery: ''
+      mapOn: true
 
      // lunches: null
     }
@@ -53,35 +47,9 @@
     }
   },
   computed: {
-    filteredLunches: function () {
-      // var sortKey = this.sortKey
-      console.log('filteredLunches................')
-      var filterKey = this.searchQuery && this.searchQuery.toLowerCase()
-   //   var order = this.sortOrders[sortKey] || 1
-      var lunches = this.$store.getters.lunches
-      if (filterKey) {
-        lunches = lunches.filter(function (row) {
-          return Object.keys(row).some(function (key) {
-            return String(row[key]).toLowerCase().indexOf(filterKey) > -1
-          })
-        })
-      }
-      // if (sortKey) {
-      //   heroes = heroes.slice().sort(function (a, b) {
-      //     a = a[sortKey]
-      //     b = b[sortKey]
-      //     return (a === b ? 0 : a > b ? 1 : -1) * order
-      //   })
-      // }
-      return lunches
-    },
     lunches(){
       return this.$store.getters.lunches
     },
-    isLoggedIn: function(){
-      console.log("isLoggedIn is " + this.$store.state.isLoggedIn)
-      return this.$store.state.isLoggedIn
-    }
 			// loading() {
 			// 	console.log("isLoading", this.$store.getters.isProductLoading);
 			// 	return this.$store.getters.isProductLoading;
@@ -114,11 +82,6 @@
   .container{
     display: flex;
     flex-direction: column;
-  }
-  .search-lunch{
-    padding: 10px;
-    border: 1px solid black;
-    background: #b5b5b5;
   }
   .lunch-list{
     width: 80%;

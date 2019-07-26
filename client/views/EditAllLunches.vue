@@ -13,8 +13,8 @@
   
   <script>
   import GridData from '@/components/GridData'
-
-  export default {
+  module.exports = {
+  // export default {
     name: 'editall',
     components: {
       "grid-data": GridData

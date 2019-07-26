@@ -29,7 +29,7 @@
             </div>
           </div>
           <div id="landing-image">
-            <img src="../assets/eat.jpg" alt="">
+            <img src="../images/eat.jpg" alt="">
             
             <!-- <img src="../assets/lunch01.jpg" alt=""> -->
           </div>
@@ -41,7 +41,8 @@
 </template>
 
 <script>
-export default {
+  module.exports = {
+// export default {
   name: 'home',
   data () {
     return {
@@ -49,9 +50,9 @@ export default {
     }
   },
   methods:{
-    loadGroups(){
-      this.$store.dispatch('loadGroups')
-    }
+    // loadGroups(){
+    //   this.$store.dispatch('loadGroups')
+    // }
   },
   computed: {
     users() {
@@ -60,7 +61,7 @@ export default {
   },
   created() {
     console.log("created home loading....")
-    this.loadGroups()
+   // this.loadGroups()
   }
 }
 </script>

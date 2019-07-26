@@ -48,6 +48,9 @@ var mystore = {
     lunches: state => {
       return state.lunches
     },
+    groups: state => {
+      return state.groups
+    },
     accounts: state => {
       return state.accounts
     },
@@ -141,6 +144,24 @@ var mystore = {
       state.token = ''
       state.isLoggedIn = false
     },
+    loadLunches (state,lunches){
+      state.lunches = lunches
+    },
+    addLunch (state,lunch){
+      console.log(`mutations: addLunch: ${JSON.stringify(lunch, null, 3)}`)
+      state.lunches.push(lunch)
+    },
+    addGroup (state,group){
+      console.log("addGroup " + JSON.stringify(group, null, 3))
+      state.groups.push(group)
+    },
+    loadGroups (state,payload){
+      state.groups = payload
+    },
+    updateLunch (state,lunch){
+      console.log("mutation: updateLunch " + JSON.stringify(lunch, null, 3))
+      //state.groups.push(group)
+    }
   },
   actions: {
        // accounts
@@ -220,7 +241,7 @@ var mystore = {
      async login({commit}, data){
       console.log(` adding user ${JSON.stringify(data, null, 3)}`)
       commit('auth_request')
-      const response = await fetch('http://localhost:3019/user/login', {
+      const response = await fetch('http://localhost:3029/user/login', {
           body: JSON.stringify(data), // must match 'Content-Type' header
           headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -242,7 +263,7 @@ var mystore = {
     async register({commit}, data){
       console.log(` register user ${JSON.stringify(data, null, 3)}`)
       commit('auth_request')
-      const response = await fetch('http://localhost:3019/user/signup', {
+      const response = await fetch('http://localhost:3029/user/signup', {
           body: JSON.stringify(data), // must match 'Content-Type' header
           headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -271,6 +292,45 @@ var mystore = {
         resolve()
     })
   },
+  async loadLunches ({ commit }) {
+    console.log(`loadLunches*********************************************************`)
+      const response = await fetch('http://localhost:3029/lunches');
+      const json = await response.json();
+      commit('loadLunches',json)            
+  },
+  async addLunch ({ commit },lunch) {
+   // var lunches = (await LunchService.index()).data
+   // console.log(` got all lunches cnt=${this.lunches.length}`)
+   var url = "http://localhost:3029/lunches"
+        console.log(` adding lunch ${JSON.stringify(lunch, null, 3)}`)
+        const response = await fetch(url, {
+          body: JSON.stringify(lunch), // must match 'Content-Type' header
+          headers: {
+            // 'user-agent': 'Mozilla/4.0 MDN Example',
+            "Content-type": "application/json; charset=UTF-8"
+          },
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        })
+        const json = await response.json();
+
+
+    commit('addLunch', json)
+  },
+  // async updateLunch ({ commit },payload) {
+  //  // var lunches = (await LunchService.index()).data
+  //  console.log(` updateLunch (store.js)=${JSON.stringify(payload, null, 3)}`)
+  //   commit('updateLunch',  (await LunchService.put(payload)).data)
+  // },
+  // async loadGroups ({ commit }) {
+  // //  var lunches = (await LunchService.index()).data
+  //   console.log(` loading all groups******************`)
+  //   commit('loadGroups',  (await GroupService.index()).data)
+  //  },
+  // async addGroup ({ commit}, group) {
+  //   var group = (await GroupService.post(group)).data
+   
+  //   commit('addGroup',  group)
+  // }
   }
 }
 

@@ -50,7 +50,8 @@
   import Example from '@/views/Example'
 
   import { mapActions } from 'vuex';
-  export default {
+  module.exports = {
+  // export default {
     name: 'Groups',
     components: {
       'make-lunch': MakeLunch,

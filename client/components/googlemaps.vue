@@ -11,8 +11,9 @@
 </div>
 </template>
 <script>
-     import { Bus } from '../main'
-export default {
+  //   import { Bus } from '../main'
+module.exports = {
+// export default {
     props: ['locations'],
 	data() {
 		return {
@@ -285,6 +286,7 @@ export default {
     //   }
   },
   mounted: function(){
+      console.log("mounted: google maps")
       var self = this;
       this.initMap();
       this.makeNewMarkers(this.locations);
